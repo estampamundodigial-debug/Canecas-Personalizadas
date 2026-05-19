@@ -1,0 +1,10 @@
+ALTERAÇÃO REALIZADA
+
+O cálculo de entrega agora mostra somente:
+1. Loggi - Express
+2. J&T/JET - Standard
+3. Correios - SEDEX
+
+As demais opções retornadas pelo Melhor Envio são filtradas no backend e não aparecem para o cliente.
+
+Caso alguma opção não esteja disponível para o CEP consultado, ela não será exibida.

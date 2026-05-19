@@ -1,0 +1,22 @@
+ESTAMPA MUNDO - Melhor Envio integrado
+
+1) Rode normalmente:
+   npm install
+   npm start
+
+2) Abra:
+   Site:   http://localhost:3000
+   Painel: http://localhost:3000/painel.html
+
+3) Para frete REAL do Melhor Envio:
+   - copie .env.example para .env
+   - coloque seu token em MELHOR_ENVIO_TOKEN
+   - coloque o CEP de origem da sua loja em MELHOR_ENVIO_FROM_CEP
+   - deixe MELHOR_ENVIO_SANDBOX=false para produção
+
+4) Enquanto não colocar token real, o site usa MODO TESTE para não quebrar a experiência.
+
+5) Pacote padrão configurado:
+   - caixa 12 x 12 x 12 cm
+   - peso 0.5 kg
+   - valor declarado R$29,90

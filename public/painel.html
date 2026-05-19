@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel | Estampa Mundo</title>
+<link rel="icon" href="logo.png" type="image/png">
+<style>
+:root{
+  --bg:#070a16;
+  --card:#11172b;
+  --card2:#151d36;
+  --line:#29375f;
+  --txt:#ffffff;
+  --muted:#aab5d6;
+  --pink:#ff1aa8;
+  --purple:#721bff;
+  --blue:#00d4ff;
+  --green:#00d66b;
+  --yellow:#ffe600;
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,Arial,Helvetica,sans-serif}
+body{
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 12% 8%,rgba(255,26,168,.20),transparent 30%),
+    radial-gradient(circle at 88% 10%,rgba(0,212,255,.18),transparent 28%),
+    linear-gradient(135deg,#070a16,#0b1020 62%,#111632);
+  color:var(--txt);
+  padding:22px;
+}
+button,select,input{font-family:inherit}
+.container{max-width:1380px;margin:auto}
+.login{
+  max-width:420px;margin:10vh auto;background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.03));
+  border:1px solid rgba(255,255,255,.15);border-radius:30px;padding:30px;box-shadow:0 28px 80px rgba(0,0,0,.42);text-align:center;
+}
+.login img{width:96px;height:96px;object-fit:cover;border-radius:26px;display:block;margin:0 auto 16px;box-shadow:0 14px 34px rgba(0,0,0,.35)}
+.login h2{font-size:30px;margin-bottom:8px}.login p{color:var(--muted);line-height:1.4}
+.login input{width:100%;border:1px solid var(--line);background:#0d1326;color:#fff;border-radius:18px;padding:16px;font-size:17px;margin-top:18px;outline:none}
+.btn{
+  border:0;border-radius:16px;background:linear-gradient(90deg,var(--pink),var(--purple));color:white;font-weight:1000;padding:14px 18px;cursor:pointer;
+  box-shadow:0 12px 28px rgba(114,27,255,.25);transition:.2s;white-space:nowrap;
+}
+.btn:hover{transform:translateY(-1px);filter:brightness(1.08)}
+.btn.green{background:linear-gradient(90deg,#00b35b,#00dc75);box-shadow:0 12px 28px rgba(0,214,107,.22)}
+.btn.ghost{background:#202943;box-shadow:none;border:1px solid #35446d}
+header{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:20px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:14px}.logo{width:72px;height:72px;object-fit:cover;border-radius:22px;box-shadow:0 14px 34px rgba(0,0,0,.30)}
+h1{font-size:34px;line-height:1.05}.subtitle{color:var(--muted);margin-top:5px}.toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.search{min-width:280px;background:#0d1326;border:1px solid var(--line);color:#fff;border-radius:16px;padding:14px 16px;font-size:15px;outline:none}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}.crmBox{margin-bottom:18px;background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.035));border:1px solid rgba(255,255,255,.13);border-radius:26px;padding:16px}.crmHead{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}.crmHead h2{font-size:24px}.crmForm{display:grid;grid-template-columns:1fr auto auto;gap:10px;margin-top:12px}.crmForm input{background:#0d1326;color:#fff;border:1px solid #35446d;border-radius:16px;padding:14px 16px;font-size:15px;outline:none}.alertaNovo{display:none;margin-bottom:14px;background:linear-gradient(90deg,#ffe600,#ff8a00);color:#251300;border-radius:20px;padding:14px 16px;font-weight:1000;box-shadow:0 16px 36px rgba(0,0,0,.25)}.alertaNovo.show{display:block}.whatsLink{color:inherit;text-decoration:underline}.monitoramentoBox{margin-bottom:18px;background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.035));border:1px solid rgba(255,255,255,.13);border-radius:26px;padding:16px}.monitoramentoBox h2{font-size:24px;margin-bottom:12px}.monitorGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.monitorItem{background:rgba(8,12,28,.62);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:13px}.monitorItem strong{display:block;font-size:22px}.monitorItem span{color:var(--muted);font-size:12px;font-weight:900}.danger{background:linear-gradient(90deg,#ff3b3b,#c40000)!important;box-shadow:0 12px 28px rgba(255,59,59,.18)!important}.btn.warn{background:linear-gradient(90deg,#ffe600,#ff9d00);color:#281600;box-shadow:0 12px 28px rgba(255,230,0,.18)}.metric{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:22px;padding:16px}.metric strong{font-size:25px;display:block}.metric span{color:var(--muted);font-size:13px;font-weight:800}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(410px,1fr));gap:16px}.empty{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:24px;color:var(--muted)}
+.card{background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.035));border:1px solid rgba(255,255,255,.13);border-radius:28px;padding:16px;box-shadow:0 18px 42px rgba(0,0,0,.25);display:grid;grid-template-columns:138px 1fr;gap:14px;align-items:start;min-width:0}
+.media{width:138px}.photoBox{width:138px;height:138px;border-radius:22px;overflow:hidden;background:#202943;border:1px solid #334064;display:flex;align-items:center;justify-content:center;box-shadow:inset 0 0 0 1px rgba(255,255,255,.04)}
+.photoBox img{width:100%;height:100%;object-fit:cover;display:block}.noPhoto{color:var(--muted);font-weight:900;text-align:center;font-size:13px;padding:12px}.miniActions{display:flex;gap:6px;margin-top:8px;flex-direction:column}.miniActions .btn{width:100%;font-size:12px;padding:10px 9px;border-radius:13px;text-align:center;text-decoration:none;display:block}
+.content{min-width:0}.topline{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin-bottom:10px}.tag{display:inline-block;background:linear-gradient(90deg,var(--pink),var(--purple));padding:7px 11px;border-radius:999px;font-size:12px;font-weight:1000}.date{font-size:12px;color:var(--muted);text-align:right;line-height:1.3}.status{background:#222b4b;border:1px solid #35446d;border-radius:999px;padding:6px 10px;display:inline-block;margin-top:6px;font-size:12px;font-weight:1000;color:#dfe6ff}
+.info{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:8px}.field{background:rgba(8,12,28,.62);border:1px solid rgba(255,255,255,.08);border-radius:15px;padding:10px;min-width:0}.field.full{grid-column:1/-1}.field b{display:block;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}.field span{font-size:14px;line-height:1.35;word-break:break-word}.frete{border-color:rgba(0,214,107,.30);background:rgba(0,214,107,.08)}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}.actions select{background:#0d1326;color:white;border:1px solid #35446d;padding:11px;border-radius:13px;font-weight:900;outline:none;flex:1;min-width:145px}.actions .btn{font-size:13px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;padding:12px 14px}
+.viewer{position:fixed;inset:0;background:rgba(0,0,0,.82);display:none;align-items:center;justify-content:center;z-index:99;padding:24px}.viewer.show{display:flex}.viewerInner{max-width:min(92vw,980px);max-height:92vh;background:#10172c;border:1px solid #35446d;border-radius:28px;padding:16px;box-shadow:0 30px 90px rgba(0,0,0,.65)}.viewer img{max-width:100%;max-height:78vh;object-fit:contain;border-radius:18px;background:#fff}.viewerTop{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.viewerTop strong{font-size:18px}.close{background:#2b3558;border:1px solid #4b5c91;color:white;border-radius:12px;padding:10px 13px;cursor:pointer;font-weight:900}
+@media(max-width:980px){.metrics{grid-template-columns:repeat(2,1fr)}.monitorGrid{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}}
+@media(max-width:620px){.crmForm{grid-template-columns:1fr}.monitorGrid{grid-template-columns:1fr}body{padding:14px}.brand{align-items:flex-start}.logo{width:58px;height:58px;border-radius:18px}h1{font-size:25px}.toolbar{width:100%}.search{min-width:0;width:100%}.metrics{grid-template-columns:1fr 1fr}.card{grid-template-columns:1fr}.media{width:100%;display:grid;grid-template-columns:118px 1fr;gap:10px;align-items:start}.photoBox{width:118px;height:118px}.miniActions{margin-top:0}.info{grid-template-columns:1fr}.actions{flex-direction:column;align-items:stretch}.actions .btn,.actions select{width:100%}}
+</style>
+</head>
+<body>
+<section id="login" class="login">
+  <img src="logo.png" alt="Estampa Mundo">
+  <h2>Entrar no painel</h2>
+  <p>Área de produção para visualizar pedidos, fotos e fretes.</p>
+  <input id="senha" type="password" placeholder="Senha do painel" onkeydown="if(event.key==='Enter') entrar()">
+  <button class="btn green" onclick="entrar()">Entrar no painel</button>
+</section>
+
+<main id="painel" class="container" style="display:none">
+  <header>
+    <div class="brand">
+      <img class="logo" src="logo.png" alt="Estampa Mundo">
+      <div>
+        <h1>Pedidos Estampa Mundo</h1>
+        <p class="subtitle">Painel profissional para produção: pedidos, fotos, entrega e atendimento.</p>
+      </div>
+    </div>
+    <div class="toolbar">
+      <input id="busca" class="search" placeholder="Buscar por nome, pedido, tema, telefone..." oninput="renderPedidos()">
+      <select id="filtroStatus" class="search" onchange="renderPedidos()"><option value="">Todos os status</option><option>Novo</option><option>Em atendimento</option><option>Aguardando pagamento</option><option>Pago</option><option>Produzindo</option><option>Pronto</option><option>Saiu para entrega</option><option>Entregue</option><option>Finalizado</option></select>
+      <button class="btn ghost" onclick="carregarPedidos()">Atualizar</button>
+    </div>
+  </header>
+
+  <div id="alertaNovoPedido" class="alertaNovo"></div>
+
+  <section class="crmBox">
+    <div class="crmHead">
+      <div>
+        <h2>CRM e notificações</h2>
+        <p class="subtitle">Configure seu WhatsApp para aviso rápido quando chegar pedido novo.</p>
+      </div>
+      <button class="btn ghost" onclick="tocarAlerta()">Testar som</button>
+    </div>
+    <div class="crmForm">
+      <input id="whatsappNotificacao" placeholder="WhatsApp para aviso. Ex: 11999999999">
+      <button class="btn green" onclick="salvarConfiguracoes()">Salvar WhatsApp</button>
+      <button class="btn ghost" onclick="testarWhatsAppNotificacao()">Testar aviso</button>
+    </div>
+    <p class="subtitle" style="margin-top:10px">Aviso automático real pelo WhatsApp exige API oficial ou serviço externo. Aqui deixei alerta no painel + link pronto para enviar.</p>
+  </section>
+
+
+  <section id="monitoramento" class="monitoramentoBox">
+    <h2>Monitoramento do funil</h2>
+    <div class="monitorGrid">
+      <div class="monitorItem"><strong id="aVisitasHoje">0</strong><span>visitas hoje</span></div>
+      <div class="monitorItem"><strong id="aVisitasTotal">0</strong><span>visitas totais</span></div>
+      <div class="monitorItem"><strong id="aFretesHoje">0</strong><span>fretes calculados hoje</span></div>
+      <div class="monitorItem"><strong id="aLeadsHoje">0</strong><span>leads/WhatsApp hoje</span></div>
+      <div class="monitorItem"><strong id="aPedidosHoje">0</strong><span>pedidos enviados hoje</span></div>
+      <div class="monitorItem"><strong id="aPedidosTotal">0</strong><span>pedidos totais</span></div>
+      <div class="monitorItem"><strong id="aTaxa">0%</strong><span>conversão estimada</span></div>
+      <div class="monitorItem"><strong id="aFretesTotal">0</strong><span>fretes calculados total</span></div>
+      <div class="monitorItem"><strong id="aFaturamento">R$ 0,00</strong><span>faturamento estimado</span></div>
+    </div>
+  </section>
+
+  <section class="metrics">
+    <div class="metric"><strong id="mTotal">0</strong><span>Total de pedidos</span></div>
+    <div class="metric"><strong id="mNovos">0</strong><span>Novos</span></div>
+    <div class="metric"><strong id="mProd">0</strong><span>Produzindo</span></div>
+    <div class="metric"><strong id="mFim">0</strong><span>Finalizados</span></div>
+  </section>
+
+  <div id="pedidos" class="grid"></div>
+</main>
+
+<div id="viewer" class="viewer" onclick="fecharFoto(event)">
+  <div class="viewerInner">
+    <div class="viewerTop"><strong>Foto do pedido</strong><button class="close" onclick="fecharFoto(event)">Fechar</button></div>
+    <img id="viewerImg" src="" alt="Foto ampliada">
+  </div>
+</div>
+
+<script>
+let senhaPainel = "";
+let listaPedidos = [];
+let ultimoPedidoVisto = null;
+let configPainel = { whatsappNotificacao: "" };
+
+function entrar(){
+  senhaPainel = document.getElementById("senha").value.trim();
+  if(!senhaPainel){ alert("Digite a senha."); return; }
+  document.getElementById("login").style.display = "none";
+  document.getElementById("painel").style.display = "block";
+  carregarConfiguracoes();
+  carregarPedidos();
+  iniciarAtualizacaoAutomatica();
+}
+
+
+async function carregarConfiguracoes(){
+  try{
+    const resp = await fetch(`/api/configuracoes?senha=${encodeURIComponent(senhaPainel)}`);
+    if(!resp.ok) return;
+    configPainel = await resp.json();
+    document.getElementById("whatsappNotificacao").value = configPainel.whatsappNotificacao || "";
+  }catch(e){}
+}
+
+async function salvarConfiguracoes(){
+  const numero = document.getElementById("whatsappNotificacao").value.trim();
+  const resp = await fetch(`/api/configuracoes?senha=${encodeURIComponent(senhaPainel)}`,{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({whatsappNotificacao: numero})
+  });
+  if(!resp.ok){ alert("Não foi possível salvar."); return; }
+  const data = await resp.json();
+  configPainel = data.config;
+  alert("WhatsApp de notificação salvo.");
+}
+
+function linkAvisoPedido(p){
+  const numero = String(configPainel.whatsappNotificacao || "").replace(/\D/g,"");
+  if(!numero) return "";
+  const texto = `NOVO PEDIDO NO SITE%0A%0APedido: ${p.id}%0ACliente: ${p.nome || "-"}%0ATema: ${p.tema || "-"}%0ATelefone: ${p.telefone || "-"}%0AFrete: ${p.frete?.nome || "-"} R$ ${p.frete?.preco || "-"}%0A%0AAcesse o painel para produzir.`;
+  return `https://api.whatsapp.com/send?phone=${numero}&text=${texto}`;
+}
+
+function testarWhatsAppNotificacao(){
+  const numero = document.getElementById("whatsappNotificacao").value.replace(/\D/g,"");
+  if(!numero){ alert("Digite um WhatsApp primeiro."); return; }
+  const n = numero.startsWith("55") ? numero : "55" + numero;
+  window.open(`https://api.whatsapp.com/send?phone=${n}&text=${encodeURIComponent("Teste de notificação do painel Estampa Mundo.")}`,"_blank");
+}
+
+function tocarAlerta(){
+  try{
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.frequency.value = 880; gain.gain.value = 0.08;
+    osc.start();
+    setTimeout(()=>{osc.stop(); ctx.close();}, 220);
+  }catch(e){}
+}
+
+function mostrarAlertaNovoPedido(p){
+  const alerta = document.getElementById("alertaNovoPedido");
+  const link = linkAvisoPedido(p);
+  alerta.innerHTML = `Novo pedido recebido: <b>${p.nome || "Cliente"}</b> • Pedido ${p.id} ${link ? `• <a class="whatsLink" target="_blank" href="${link}">Enviar aviso no WhatsApp</a>` : ""}`;
+  alerta.classList.add("show");
+  tocarAlerta();
+}
+
+function iniciarAtualizacaoAutomatica(){
+  if(window.__painelTimer) return;
+  window.__painelTimer = setInterval(()=>carregarPedidos(true), 25000);
+}
+
+async function carregarPedidos(silencioso=false){
+  const resp = await fetch(`/api/pedidos?senha=${encodeURIComponent(senhaPainel)}`);
+  if(resp.status === 401){ alert("Senha inválida."); location.reload(); return; }
+  const novaLista = await resp.json();
+  if(ultimoPedidoVisto && novaLista.length && String(novaLista[0].id) !== String(ultimoPedidoVisto) && silencioso){
+    mostrarAlertaNovoPedido(novaLista[0]);
+  }
+  listaPedidos = novaLista;
+  if(listaPedidos.length) ultimoPedidoVisto = listaPedidos[0].id;
+  atualizarMetricas();
+  renderPedidos();
+  carregarAnalytics();
+}
+
+function texto(valor){ return valor && String(valor).trim() ? valor : "-"; }
+function normalizar(v){ return String(v || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,""); }
+
+
+async function carregarAnalytics(){
+  try{
+    const resp = await fetch(`/api/analytics/resumo?senha=${encodeURIComponent(senhaPainel)}`);
+    if(!resp.ok) return;
+    const a = await resp.json();
+    document.getElementById("aVisitasHoje").innerText = a.visitasHoje || 0;
+    document.getElementById("aVisitasTotal").innerText = a.visitasTotal || 0;
+    document.getElementById("aFretesHoje").innerText = a.fretesCalculadosHoje || 0;
+    document.getElementById("aFretesTotal").innerText = a.fretesCalculadosTotal || 0;
+    document.getElementById("aLeadsHoje").innerText = a.cliquesWhatsAppHoje || 0;
+    document.getElementById("aPedidosHoje").innerText = a.pedidosHoje || 0;
+    document.getElementById("aPedidosTotal").innerText = a.pedidosTotal || 0;
+    document.getElementById("aTaxa").innerText = (a.taxaConversao || "0.0") + "%";
+    document.getElementById("aFaturamento").innerText = "R$ " + String(a.faturamento?.total || "0.00").replace(".",",");
+  }catch(e){}
+}
+
+function atualizarMetricas(){
+  document.getElementById("mTotal").innerText = listaPedidos.length;
+  document.getElementById("mNovos").innerText = listaPedidos.filter(p=>p.status==="Novo").length;
+  document.getElementById("mProd").innerText = listaPedidos.filter(p=>p.status==="Produzindo").length;
+  document.getElementById("mFim").innerText = listaPedidos.filter(p=>p.status==="Finalizado").length;
+}
+
+function renderPedidos(){
+  const busca = normalizar(document.getElementById("busca")?.value || "");
+  const statusFiltro = document.getElementById("filtroStatus")?.value || "";
+  const div = document.getElementById("pedidos");
+  const pedidos = listaPedidos.filter(p => {
+    const conteudo = normalizar(`${p.id} ${p.nome} ${p.tema} ${p.frase} ${p.telefone} ${p.cep} ${p.endereco?.cidade} ${p.status}`);
+    return conteudo.includes(busca) && (!statusFiltro || p.status === statusFiltro);
+  });
+
+  if(!pedidos.length){ div.innerHTML = `<div class="empty">Nenhum pedido encontrado.</div>`; return; }
+
+  div.innerHTML = pedidos.map(p=>{
+    const tel = String(p.telefone||"").replace(/\D/g,"");
+    const endereco = p.endereco ? `${texto(p.endereco.rua)}, ${texto(p.endereco.numero)} - ${texto(p.endereco.bairro)} • ${texto(p.endereco.cidade)}/${texto(p.endereco.uf)}${p.endereco.complemento ? " • Comp: " + p.endereco.complemento : ""}` : "-";
+    const frete = `${texto(p.frete?.nome)}${p.frete?.preco ? " • R$ " + String(p.frete.preco).replace(".",",") : ""}${p.frete?.prazo ? " • " + p.frete.prazo + " dias" : ""}`;
+    return `
+      <article class="card">
+        <div class="media">
+          <div class="photoBox">
+            ${p.foto ? `<img src="${p.foto}" alt="Foto do pedido ${p.id}" onclick="abrirFoto('${p.foto}')">` : `<div class="noPhoto">Sem foto</div>`}
+          </div>
+          <div class="miniActions">
+            ${p.foto ? `<button class="btn ghost" onclick="abrirFoto('${p.foto}')">Ampliar foto</button><a class="btn ghost" href="${p.foto}" download>Baixar foto</a>` : ``}
+          </div>
+        </div>
+        <div class="content">
+          <div class="topline">
+            <div><span class="tag">Pedido ${p.id}</span><br><span class="status">${texto(p.status)}</span></div>
+            <div class="date">${texto(p.data)}</div>
+          </div>
+          <div class="info">
+            <div class="field"><b>Tema</b><span>${texto(p.tema)}</span></div>
+            <div class="field"><b>Nome</b><span>${texto(p.nome)}</span></div>
+            <div class="field full"><b>Frase / observação</b><span>${texto(p.frase)}</span></div>
+            <div class="field"><b>WhatsApp</b><span>${texto(p.telefone)}</span></div>
+            <div class="field"><b>CEP</b><span>${texto(p.cep)}</span></div>
+            <div class="field full"><b>Endereço</b><span>${endereco}</span></div>
+            <div class="field full frete"><b>Frete</b><span>${frete}</span></div>
+          </div>
+          <div class="actions">
+            <a class="btn green" target="_blank" href="https://api.whatsapp.com/send?phone=55${tel}&text=Olá! Recebi seu pedido de caneca personalizada.">Chamar cliente</a>
+            ${p.status==="Finalizado" ? `<button class="btn danger" onclick="excluirPedido(\'${p.id}\')">Excluir finalizado</button>` : ``}
+            <select onchange="mudarStatus('${p.id}', this.value)">
+              <option ${p.status==="Novo"?"selected":""}>Novo</option>
+              <option ${p.status==="Em atendimento"?"selected":""}>Em atendimento</option>
+              <option ${p.status==="Aguardando pagamento"?"selected":""}>Aguardando pagamento</option>
+              <option ${p.status==="Pago"?"selected":""}>Pago</option>
+              <option ${p.status==="Produzindo"?"selected":""}>Produzindo</option>
+              <option ${p.status==="Pronto"?"selected":""}>Pronto</option>
+              <option ${p.status==="Saiu para entrega"?"selected":""}>Saiu para entrega</option>
+              <option ${p.status==="Entregue"?"selected":""}>Entregue</option>
+              <option ${p.status==="Finalizado"?"selected":""}>Finalizado</option>
+            </select>
+          </div>
+        </div>
+      </article>
+    `;
+  }).join("");
+}
+
+function abrirFoto(src){
+  document.getElementById("viewerImg").src = src;
+  document.getElementById("viewer").classList.add("show");
+}
+function fecharFoto(e){
+  e.stopPropagation();
+  document.getElementById("viewer").classList.remove("show");
+}
+
+async function mudarStatus(id,status){
+  await fetch(`/api/pedidos/${id}/status?senha=${encodeURIComponent(senhaPainel)}`,{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({status})
+  });
+  carregarPedidos();
+}
+
+async function excluirPedido(id){
+  if(!confirm("Tem certeza que deseja excluir este pedido finalizado? Esta ação remove o pedido do painel.")) return;
+  const resp = await fetch(`/api/pedidos/${id}?senha=${encodeURIComponent(senhaPainel)}`,{ method:"DELETE" });
+  if(!resp.ok){ alert("Não foi possível excluir o pedido."); return; }
+  carregarPedidos();
+}
+
+</script>
+</body>
+</html>

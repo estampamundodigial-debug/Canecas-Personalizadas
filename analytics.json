@@ -1,0 +1,30 @@
+{
+  "visitas": [
+    {
+      "nome": "page_view",
+      "pagina": "/",
+      "data": "2026-05-19T03:11:17.637Z",
+      "ip": "::1"
+    }
+  ],
+  "eventos": [
+    {
+      "nome": "frete_calculado",
+      "pagina": "/",
+      "data": "2026-05-19T03:11:47.551Z",
+      "ip": "::1"
+    },
+    {
+      "nome": "pedido_enviado",
+      "pagina": "/api/pedido",
+      "data": "2026-05-19T03:12:04.612Z",
+      "ip": "::1"
+    },
+    {
+      "nome": "whatsapp_click",
+      "pagina": "/",
+      "data": "2026-05-19T03:12:04.622Z",
+      "ip": "::1"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "estampa-mundo-melhor-envio",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "axios": "^1.16.1",
+    "cors": "^2.8.6",
+    "dotenv": "^16.6.1",
+    "express": "^4.22.2",
+    "multer": "^1.4.5-lts.2",
+    "node-fetch": "^3.3.2"
+  }
+}

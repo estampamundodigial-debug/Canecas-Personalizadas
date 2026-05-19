@@ -1,0 +1,19 @@
+COMO RODAR
+
+1. Extraia o ZIP.
+2. Abra a pasta do projeto no VS Code.
+3. No terminal:
+
+npm install
+npm start
+
+4. Site:
+http://localhost:3000
+
+5. Painel:
+http://localhost:3000/painel.html
+
+Configuração:
+- Melhor Envio com token autorizado no .env
+- CEP de origem: 04855515
+- Pacote padrão da caneca: 12x12x12cm, 0.5kg
